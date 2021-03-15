@@ -2,22 +2,21 @@
 <?php
     if(isset($_POST['add']))
     {
-        $lotId = $_POST('lotId');
-        $poLineId =$_POST('poLineId');
-        $receiveDate = $_POST('receivedDate');
-        $qtyReceived = $_POST('qtyReceived');
-        $amountReceived = $_POST('amountReceived');
-        $qtySold =$_POST('qtySold');
-        $amountSold =$_POST('amountSold');
-        $note =$_POST('amountSold');
-         if($conn -> query("INSERT INTO itempurchaseorderreceiveds (lotId,poLineId,receivedDate,qtyReceived,amountReceived,qtySold,amountSold,note) VALUES (N'IotId',N'poLineId',N'receivedDate',N'qtyReceived',N'amountReceived',N'qtySold',N'amountSold',N'note')"))
-        {
-            echo "<scrip>alert('Thêm thành công!');</scrip>";
-        }else{
-            echo "<scrip>alert('Thêm thất bại!');</scrip>";
+        $dataInsert = [
+            'lotId'             => $_POST['lotId'],
+            'poLineId'          => $_POST['poLineId'],
+            'receiveDate'       => $_POST['receiveDate'],
+            'qtyReceived'       => $_POST['qtyReceived'],
+            'amountReceived'    => $_POST['amountReceived'],
+            'qtySold'           => $_POST['qtySold'],
+            'amountSold'        => $_POST['amountSold'],
+            'note'              => $_POST['amountSold']
+        ];
+
+        if(!insertToDB($dataInsert)){
+            var_dump($conn->error);die;
         }
     }
-    $conn->close();
 ?>
 <div class="wrapper">
     <!-- Lưới Grid -->
@@ -105,7 +104,8 @@
                                     <div class="form-group">
                                         <input type="number" name="qtyReceived" required>
                                         <label>Số lượng nhận<span>*</span></label>
-                                <<div class="col l-12 m-12 c-12">
+                                    </div>
+                                <div class="col l-12 m-12 c-12">
                                     <div class="form-group">
                                         <input type="number" name="amountReceived" required>
                                         <label>Tổng tiền nhận<span>*</span></label>
