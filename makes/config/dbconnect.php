@@ -1,9 +1,9 @@
 <?php
     // Database connection
-    $connect = @mysqli_connect("localhost:3308","root","maiphuong");
+    $connect = @mysqli_connect("localhost","root","");
     if($connect) {}
     else echo 'Kết nối thất bại';
-    $DBSelect = @mysqli_select_db($connect,"ptweb002"); 
+    $DBSelect = @mysqli_select_db($connect,"u116687685_ptweb02"); 
 ?>
 
 <?php

@@ -31,7 +31,6 @@
     </style>
 </head>
 <body>
-   
     <div class="wrapper">
         <!-- Lưới Grid -->
         <header>
@@ -98,7 +97,7 @@
                                 <i class="fas fa-plus items__icon "></i>
                                 <p>Tạo mới</p>
                             </button>
-                            <button class="items__add">
+                            <button onclick="window.location.href='index.php?page_layout=inpdf';" class="items__add">
                                 <i class="fas fa-download items__icon"></i>
                                 <p>In danh sách</p>
                             </button>
@@ -127,11 +126,11 @@
                                         <td class="col_1"><?php echo $data['lotId'];?> </td>
                                         <td class="col_1"><?php echo $data['poLineId'];?> </td>
                                         <td class="col_1"><?php echo $data['receiveDate'];?> </td>
-                                        <td class="col_1"><?php echo $data['qtyReceived'];?> </td>
-                                        <td class="col_2"><?php echo $data['amountReceived'];?> </td>
+                                        <td class="col_1"><?php echo $data['qtyReceiveda'];?> </td>
+                                        <td class="col_1"><?php echo $data['amountReceived'];?> </td>
                                         <td class="col_1"><?php echo $data['qtySold'];?> </td>
                                         <td class="col_1"><?php echo $data['amountSold'];?> </td>
-                                        <td class="col_1" style="text-align: center"><?php echo $row ['note'];?></td>
+                                        <td class="col_2" style="text-align: center"><?php echo $data ['notea'];?></td>
                                         <td>
                                         <div class="btn">
                                             <div class="btn__view">
@@ -140,12 +139,12 @@
                                                     </a>
                                             </div>
                                             <div class="btn__edit">
-                                                <a href="./index.php?page_layout=edit" class="edit__link">
+                                                <a href="./index.php?page_layout=edit&lotId=<?php echo $data['lotId'];?>" class="edit__link">
                                                     <i class="btn_icon fas fa-pencil-alt"></i>
                                                 </a>
                                             </div>
                                             <div class="btn__delete">
-                                                <a href="index.php?page_layout=delete" class="data_link">
+                                                <a href="index.php?page_layout=delete&lotId=<?php echo $data['lotId'];?>" class="data_link">
                                                     <i class="btn_icon far fa-trash-alt"></i>
                                                 </a>
                                             </div>

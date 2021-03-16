@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 13, 2021 at 02:31 AM
+-- Generation Time: Mar 16, 2021 at 04:17 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -138,8 +138,7 @@ CREATE TABLE IF NOT EXISTS `itempurchaseorderdetails` (
 --
 
 INSERT INTO `itempurchaseorderdetails` (`poLineId`, `poId`, `itemNo`, `qty`, `qtyReceived`, `cost`, `amount`, `note`, `created_date`, `updated_date`) VALUES
-(147258, 6789, '45366', '876544', '4567982', '9877654', '8790', 'srdtfjukl;gfdfgdf', '2021-03-11 10:26:34', '2021-03-11 10:26:34'),
-(12345678, 432536547, '234556', '346575', '34567', '354657', '2354657', 'dƯAERHETRJYTUYGIUO', '2021-03-10 00:00:00', '2021-03-11 10:15:36');
+(1, 6789, '45366', '45', '656', '565456', '676', 'gygyuyua', '2021-03-10 00:00:00', '2021-03-19 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -154,21 +153,22 @@ CREATE TABLE IF NOT EXISTS `itempurchaseorderreceiveds` (
   `receiveDate` date NOT NULL COMMENT 'Ngày nhận <= create date && >=orderDate',
   `amountReceived` decimal(10,0) NOT NULL COMMENT 'Tổng tiền nhập dự kiến/ thực tế sau khi thanh toán',
   `qtySold` decimal(10,0) NOT NULL,
+  `qtyReceiveda` decimal(10,0) NOT NULL,
   `amountSold` decimal(10,0) NOT NULL COMMENT 'Tiền vốn tương ứng số lượng đã bán',
-  `note` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `notea` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Ngày tạo',
   `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Ngày sửa gần nhất',
-  PRIMARY KEY (`lotId`)
+  PRIMARY KEY (`lotId`),
+  KEY `poLineId` (`poLineId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `itempurchaseorderreceiveds`
 --
 
-INSERT INTO `itempurchaseorderreceiveds` (`lotId`, `poLineId`, `receiveDate`, `amountReceived`, `qtySold`, `amountSold`, `note`, `created_date`, `updated_date`) VALUES
-(987654, 147258, '2021-03-09', '345689', '98765', '4365768', 'rghtyjukil', '2021-03-11 10:27:12', '2021-03-11 10:27:12'),
-(36476586, 536467586, '2021-03-17', '64545678', '34567', '24354657', 'fgdfhgjgklhjhjghfgdfseartdhfj', '2021-03-08 00:00:00', '2021-03-10 17:21:24'),
-(132648465, 12345678, '2021-03-09', '200000000', '2435', '120000', 'dafsdgtfhyjkgluo;iu', '2021-03-09 00:00:00', '2021-03-11 10:09:45');
+INSERT INTO `itempurchaseorderreceiveds` (`lotId`, `poLineId`, `receiveDate`, `amountReceived`, `qtySold`, `qtyReceiveda`, `amountSold`, `notea`, `created_date`, `updated_date`) VALUES
+(2222, 1, '2021-03-13', '623', '84521', '485123', '84512', 'bjk', '2021-03-16 23:01:39', '2021-03-16 23:01:39'),
+(34567, 1, '2021-03-11', '852', '4523', '512', '48523', 'drftyugioj', '2021-03-16 21:45:20', '2021-03-16 21:45:20');
 
 -- --------------------------------------------------------
 
@@ -254,6 +254,13 @@ CREATE TABLE IF NOT EXISTS `makes` (
   `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`makeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Dumping data for table `makes`
+--
+
+INSERT INTO `makes` (`makeId`, `makeName`, `remark`, `created_date`, `updated_date`) VALUES
+(6513, 46513, 1111, '2021-03-16 21:58:48', '2021-03-16 21:59:08');
 
 -- --------------------------------------------------------
 
@@ -375,6 +382,12 @@ CREATE TABLE IF NOT EXISTS `web_product_registrations` (
 ALTER TABLE `itempurchaseorderdetails`
   ADD CONSTRAINT `FK_ITEM` FOREIGN KEY (`itemNo`) REFERENCES `items` (`itemNo`),
   ADD CONSTRAINT `FK_PO` FOREIGN KEY (`poId`) REFERENCES `itempurchaseorders` (`poId`);
+
+--
+-- Constraints for table `itempurchaseorderreceiveds`
+--
+ALTER TABLE `itempurchaseorderreceiveds`
+  ADD CONSTRAINT `itempurchaseorderreceiveds_ibfk_1` FOREIGN KEY (`poLineId`) REFERENCES `itempurchaseorderdetails` (`poLineId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

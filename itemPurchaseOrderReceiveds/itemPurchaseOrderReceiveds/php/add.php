@@ -6,11 +6,11 @@
             'lotId'             => $_POST['lotId'],
             'poLineId'          => $_POST['poLineId'],
             'receiveDate'       => $_POST['receiveDate'],
-            'qtyReceived'       => $_POST['qtyReceived'],
+            'qtyReceiveda'       => $_POST['qtyReceiveda'],
             'amountReceived'    => $_POST['amountReceived'],
             'qtySold'           => $_POST['qtySold'],
             'amountSold'        => $_POST['amountSold'],
-            'note'              => $_POST['amountSold']
+            'notea'              => $_POST['notea']
         ];
 
         if(!insertToDB($dataInsert)){
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="col l-12 m-12 c-12">
                                     <div class="form-group">
-                                        <input type="number" name="qtyReceived" required>
+                                        <input type="number" name="qtyReceiveda" required>
                                         <label>Số lượng nhận<span>*</span></label>
                                     </div>
                                 <div class="col l-12 m-12 c-12">
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="col l-12 m-12 c-12">
                                     <div class="form-group">
-                                        <textarea rows="6" name="note"></textarea>
+                                        <textarea rows="6" name="notea"></textarea>
                                         <label>Ghi chú</label>
                                     </div>
                                 </div>
