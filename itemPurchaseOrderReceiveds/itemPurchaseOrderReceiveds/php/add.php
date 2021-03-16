@@ -1,4 +1,7 @@
-
+ <?php
+    require_once 'dbhelp.php';
+ ?>
+ 
 <?php
     if(isset($_POST['add']))
     {
@@ -6,16 +9,32 @@
             'lotId'             => $_POST['lotId'],
             'poLineId'          => $_POST['poLineId'],
             'receiveDate'       => $_POST['receiveDate'],
-            'qtyReceiveda'       => $_POST['qtyReceiveda'],
             'amountReceived'    => $_POST['amountReceived'],
             'qtySold'           => $_POST['qtySold'],
+            'qtyReceiveda'       => $_POST['qtyReceiveda'],
             'amountSold'        => $_POST['amountSold'],
             'notea'              => $_POST['notea']
         ];
+        $lotId              = $_POST['lotId'];   
+        $poLineId           = $_POST['poLineId']; 
+        $receiveDate        = $_POST['receiveDate'];
+        $amountReceived     = $_POST['amountReceived'];
+        $qtySold            = $_POST['qtySold'];
+        $qtyReceiveda       = $_POST['qtyReceiveda'];
+        $amountSold         = $_POST['amountSold'];
+        $notea              = $_POST['notea'];
+        // if(!insertToDB($dataInsert)){
+        //     var_dump($conn->error);die;
+        // }
+        $sql = "INSERT INTO `itempurchaseorderreceiveds`(`lotId`, `poLineId`, `receiveDate`, `amountReceived`, `qtySold`, `qtyReceiveda`, `amountSold`, `notea`) VALUES ($lotId,$poLineId,'$receiveDate',$amountReceived,$qtySold,$qtyReceiveda,$amountSold,'$notea')";
+        $insert = runQuery($sql);
+        
+        if($insert){
+            echo "<script>alert('OK');
+                        location.replace('index.php');
+            </script>";
+        }else die();
 
-        if(!insertToDB($dataInsert)){
-            var_dump($conn->error);die;
-        }
     }
 ?>
 <div class="wrapper">
@@ -90,7 +109,17 @@
                                 </div>
                                 <div class="col l-6 m-12 c-12">
                                     <div class="form-group">
-                                        <input type="text" name="poLineId" required>
+                                        <select name="poLineId">
+                                   <?php
+                                        $result = runQuery("SELECT * FROM `itempurchaseorderdetails`");
+                                        $data = fetchData($result);
+                                        foreach ($data as $key => $value) {
+                                            ?>
+                                            <option value="<?php echo $value['poLineId']?>"><?php echo $value['poLineId']?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                        </select>
                                         <label>Mã đơn hàng<span>*</span></label>
                                     </div>
                                 </div>

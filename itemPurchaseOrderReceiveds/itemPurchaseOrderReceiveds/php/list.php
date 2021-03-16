@@ -1,11 +1,16 @@
-<?php require_once('config.php');?>
-<?php
-    $sql= "SELECT *FROM `itempurchaseorderreceiveds`  join `itempurchaseorderdetails` ON itempurchaseorderreceiveds.poLineId= itempurchaseorderdetails.poLineId";
-    $query=mysqli_query($conn,$sql) ; 
-     while ( $row= mysqli_fetch_assoc($query)){
-         $data[]=$row;
-     }
-     ?>
+<?php 
+
+    require_once('dbhelp.php');
+
+    $sql= "SELECT *FROM `itempurchaseorderreceiveds`  join `itempurchaseorderdetails` ON itempurchaseorderreceiveds.poLineId = itempurchaseorderdetails.poLineId";
+
+    if($_GET['action'] === 'search'){
+        require_once 'search.php';
+    }
+    
+    $result = runQuery($sql) ; 
+    $data = fetchData($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,9 +42,9 @@
             <div class="grid">
                 <div class="navbar">
                     <div class="search">
-                        <form action="#" class="search__box">
-                            <a class="search__link" href="#"><i class="fas fa-search search__icon"></i></a>
-                            <input type="text" class="search__input" placeholder="Search here...">
+                        <form action="?action=search" class="search__box" method="POST">
+                            <input type="text" name="input" class="search__input" placeholder="Search here...">
+                            <button class="search__link" name="search" type="submit">Search</button>
                         </form>
                     </div>
                     <div class="account">

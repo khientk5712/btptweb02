@@ -1,11 +1,12 @@
 
  <?php
+ require_once 'dbhelp.php';
     $lotId = $_GET['lotId'];
     $sql_up = "SELECT * FROM itempurchaseorderreceiveds WHERE lotId ='$lotId'";
     $query_up = mysqli_query($conn, $sql_up);
     $row_up = mysqli_fetch_assoc($query_up);
 
-    if(isset($_POST['add'])) {
+    if(isset($_POST['edit'])) {
 
         $lotId = $_POST['lotId'];
         $poLineId = $_POST['poLineId'];
@@ -15,10 +16,14 @@
         $qtyReceiveda=$_POST['qtyReceiveda'];
         $amountSold=$_POST['amountSold'];
         $notea=$_POST['notea'];
-        $sql = "UPDATE itempurchaseorderreceiveds SET lotId='$lotId', poLineId='$poLineId', receiveDate='$receiveDate',amountReceived='$amountReceived',qtySold='$qtySold',qtyReceiveda='$qtyReceiveda',amountSold='$amountSold',notea='$notea', WHERE lotId ='$lotId'";
-
-        $query = mysqli_query($conn,$sql);
-        header('location: ./index.php?page_layout=list');
+        $sql = "UPDATE `itempurchaseorderreceiveds` SET lotId=$lotId, poLineId=$poLineId, receiveDate='$receiveDate',amountReceived=$amountReceived,qtySold=$qtySold,qtyReceiveda=$qtyReceiveda,amountSold=$amountSold,notea='$notea' WHERE lotId=$lotId";
+        $update = runQuery($sql);
+        if($update){
+            echo "<script>alert('OK');
+                        location.replace('index.php');
+            </script>";
+        }else die();
+        
     }
 ?>
 <div class="wrapper">
@@ -99,7 +104,7 @@
                                 </div>
                                 <div class="col l-6 m-12 c-12">
                                     <div class="form-group"> 
-                                    <input type="datetime-local" name="receiveDate" required value="<?php echo $row_up['receiveDate'];?>">
+                                    <input type="date" name="receiveDate" required value="<?php echo $row_up['receiveDate'];?>">
                                         <label>Ngày đặt hàng</label> 
                                     </div>
                                 </div>
@@ -138,7 +143,7 @@
                                     </div>
                                 </div>
                                 <div class="col l-12 m-10 c-10">
-                                    <button class = "form__button" type="submit" name="add">Lưu thay đổi</button>
+                                    <button class = "form__button" type="submit" name="edit">Lưu thay đổi</button>
                                 </div>
                             </form>
                         </div>

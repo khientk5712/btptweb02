@@ -36,6 +36,8 @@ return $finalstring;
 }
 ?>
 <?php
+    
+    
     function insertToDB($aryData){
         global $conn;
         $sql = "INSERT INTO itempurchaseorderreceiveds (" . implode(", ", array_keys($aryData)) . ") VALUES ('" . implode("', '", array_values($aryData)) . "')";
