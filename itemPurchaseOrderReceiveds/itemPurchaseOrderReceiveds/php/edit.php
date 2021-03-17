@@ -15,7 +15,7 @@
         $qtyReceiveda=$_POST['qtyReceiveda'];
         $amountSold=$_POST['amountSold'];
         $notea=$_POST['notea'];
-        $sql = "UPDATE itempurchaseorderreceiveds SET lotId='$lotId', poLineId='$poLineId', receiveDate='$receiveDate',amountReceived='$amountReceived',qtySold='$qtySold',qtyReceiveda='$qtyReceiveda',amountSold='$amountSold',notea='$notea', WHERE lotId ='$lotId'";
+        $sql = "UPDATE itempurchaseorderreceiveds SET lotId='$lotId', poLineId='$poLineId', receiveDate='$receiveDate',amountReceived='$amountReceived',qtySold='$qtySold',qtyReceiveda='$qtyReceiveda',amountSold='$amountSold',notea='$notea' WHERE lotId ='$lotId'";
 
         $query = mysqli_query($conn,$sql);
         header('location: ./index.php?page_layout=list');

@@ -5,6 +5,7 @@
      while ( $row= mysqli_fetch_assoc($query)){
          $data[]=$row;
      }
+    $total=$row['qtyReceiveda']*$row['cost'];
      ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,7 +128,7 @@
                                         <td class="col_1"><?php echo $data['poLineId'];?> </td>
                                         <td class="col_1"><?php echo $data['receiveDate'];?> </td>
                                         <td class="col_1"><?php echo $data['qtyReceiveda'];?> </td>
-                                        <td class="col_1"><?php echo $data['amountReceived'];?> </td>
+                                        <td class="col_1"><?php echo $total;?> </td>
                                         <td class="col_1"><?php echo $data['qtySold'];?> </td>
                                         <td class="col_1"><?php echo $data['amountSold'];?> </td>
                                         <td class="col_2" style="text-align: center"><?php echo $data ['notea'];?></td>
